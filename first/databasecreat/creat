@@ -11,7 +11,27 @@ CREATE TABLE users (
     age INT,
     height FLOAT,
     weight FLOAT,
-    bmi FLOAT,
-    fitnessGoal VARCHAR(255),
-    exerciseType VARCHAR(255)
+    bmi FLOAT
+);
+CREATE TABLE goals (
+    goal_id INT AUTO_INCREMENT PRIMARY KEY,
+    goal_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE exercise_types (
+    exercise_type_id INT AUTO_INCREMENT PRIMARY KEY,
+    exercise_name VARCHAR(255) NOT NULL
+);
+CREATE TABLE user_goals (
+    user_goal_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    goal_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (goal_id) REFERENCES goals(goal_id)
+);
+CREATE TABLE user_exercise_types (
+    user_exercise_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    exercise_type_id INT,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (exercise_type_id) REFERENCES exercise_types(exercise_type_id)
 );
